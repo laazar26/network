@@ -1,0 +1,236 @@
+@import 'buttons';
+@import 'config';
+@import 'alerts';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Signup Page
+.signup-section {
+  .signup__first--col {
+    height: 100vh;
+    background: linear-gradient(#e66465, #9198e5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .signup__second--col {
+    // background-color: #121112;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .btn--register {
+    background-color: #4285f4;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+    min-width: 400px;
+    font-weight: $mediunm-weight;
+  }
+
+  .btn--register:hover {
+    background-color: #357ae8;
+  }
+
+  .btn--register:active {
+    background-color: #1669db;
+  }
+
+  .btn--login {
+    background-color: #dadada;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+    min-width: 400px;
+    font-weight: $mediunm-weight;
+  }
+
+  .btn--login:hover {
+    background-color: #a3a3a3;
+  }
+
+  .btn--login:active {
+    background-color: #808080;
+  }
+
+  .register-popup {
+    @include popup;
+  }
+
+  .login-popup {
+    @include popup;
+  }
+}
+
+// APP
+
+.app {
+  background-color: $app-bg-color;
+  height: 100vh;
+
+  .win-right {
+    border: 1px solid #fff;
+    height: 230px;
+
+    p {
+      color: #e8e6e3;
+      font-size: 20px;
+    }
+  }
+
+  h2 {
+    color: #e8e6e3;
+    font-size: 20px;
+  }
+
+  .acc-name {
+    color: #e8e6e3;
+    font-size: 18px;
+  }
+
+  .post-inp {
+    color: #e8e6e3;
+    // padding: 10px 40px 10px 10px;
+    padding: 30px 0 80px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    width: 100%;
+  }
+
+  .comment-inp {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    color: #e8e6e3;
+    font-size: 16px;
+    line-height: 1.5;
+    // margin-bottom: 20px;
+  }
+
+  .comment-inp:focus {
+    outline: none;
+    border-color: #0080ff;
+  }
+
+  // input[type="submit"] {
+  //   color: #e8e6e3;
+  //   padding: 10px 20px;
+  //   border: none;
+  //   border-radius: 5px;
+  //   cursor: pointer;
+  //   font-size: 18px;
+  // }
+
+  input:focus {
+    border: none;
+    outline: none;
+  }
+
+  .comment-inp {
+    padding: 0;
+  }
+
+  .heart {
+    color: #fff;
+    font-size: 30px;
+  }
+
+  .btn--like {
+    color: #e8e6e3;
+    margin-right: 30px;
+    border: 1px solid #fff;
+  }
+
+  .account {
+    cursor: pointer;
+    font-weight: $mediunm-weight;
+  }
+
+  .logout {
+    cursor: pointer;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 100%;
+    font-weight: $mediunm-weight;
+  }
+}
+
+// .test {
+// }
+
+// .test:hover {
+//   background-color: #0080ff;
+//   padding: 5px 10px;
+// }
+
+.blur {
+  z-index: 1;
+  filter: blur(4px);
+}
+
+.register-message {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.acc--info_ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.acc--info_ul li:first-child {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+ul li:first-child:hover {
+  background: none;
+}
+
+.acc-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 15px 30px;
+  cursor: pointer;
+}
+
+.acc-item:hover {
+  background-color: rgb(24, 24, 24);
+  border-radius: 25px;
+}
+
+.post--ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.post-item {
+  display: flex;
+}
+
+// .alert.hidde {
+//   display: none;
+// }

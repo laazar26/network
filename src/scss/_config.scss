@@ -1,0 +1,70 @@
+$mediunm-weight: 500;
+$bold-weight: 700;
+
+$bg-color: #252525;
+// $app-bg-color: #191919;
+$app-bg-color: #010001;
+
+.hidden {
+  display: none;
+}
+
+%fle {
+  margin: auto;
+  display: flex;
+}
+
+.z-index {
+  z-index: 99;
+}
+
+@mixin popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: $bg-color;
+  border-radius: 20px;
+  padding: 80px 100px;
+  z-index: 10;
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    // padding: 10px 30px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  input[type='submit'] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+  transition: all 0.5s;
+}

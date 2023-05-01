@@ -1,0 +1,84 @@
+// .btn {
+//   padding: 20px 40px;
+//   min-width: 400px;
+//   border: 1px solid #fff;
+//   background-color: #0298d3;
+// }
+
+.btn--popup__register {
+  border: none;
+  background-color: #0298d3;
+  margin: 10px 0;
+  padding: 5px 10px;
+  min-width: 150px;
+  border-radius: 5px;
+
+  transition: all 0.3s;
+}
+
+.btn--popup__register:hover {
+  background-color: #0289be;
+}
+
+.btn--popup__login {
+  border: none;
+  background-color: #264f5f;
+  padding: 5px 10px;
+  min-width: 150px;
+  border-radius: 5px;
+}
+
+.btn--popup__login:hover {
+  background-color: #224756;
+}
+
+.btn--close-modal {
+  font-family: inherit;
+  color: #e8e6e3;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  font-size: 40px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.btn--close-modal:hover {
+  color: #fff;
+}
+
+.btn--post {
+  color: #e8e6e3;
+  border-radius: 10px;
+  padding: 7px 15px;
+}
+
+// special hover effect
+.btn-like {
+  padding: 8px 28px;
+  margin-right: 10px;
+  background: rgb(13, 110, 253);
+  float: left;
+  border: 0px;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow: 0 0 1px #ccc;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  box-shadow: 0px 0 0 rgb(11, 94, 215) inset;
+  min-width: 120px;
+}
+.btn-like:hover {
+  box-shadow: -120px 0 0 rgb(11, 94, 215) inset;
+}
+
+.btn--delete_post {
+  padding: 8px 28px;
+  border: 0px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #dd3544;
+  transition-duration: 0.5s;
+  min-width: 120px;
+}
