@@ -1,12 +1,12 @@
 import { locale } from 'core-js';
-import { getCurrentUser } from './helpers.js';
+import { async } from 'regenerator-runtime';
 // prettier-ignore
 import { state, getUser, sendUserData, getUserData, createPost } from './model.js';
+import { AJAX } from './helpers.js';
+import { API_URL } from './config.js';
 // import * as model from './model.js';
 import 'core-js/stable';
-import { async } from 'regenerator-runtime';
 import 'regenerator-runtime/runtime';
-import { API_URL } from './config.js';
 
 const btnRegister = document.querySelector('.btn--register');
 const btnLogin = document.querySelector('.btn--login');
@@ -123,8 +123,6 @@ btnPopupRegister.forEach(btn => {
   });
 });
 
-// getUserData('email@gmail.com', 123);
-// alert('test');
 const btnLogout = document.querySelector('.btn--logout');
 btnLogout.addEventListener('click', function () {
   console.log('click');
@@ -143,8 +141,13 @@ btnLogout.addEventListener('click', function () {
 const btnPost = document.querySelector('.btn--post');
 btnPost.addEventListener('click', async function () {
   console.log(state.loggedUser);
-  // TODO:
+  // TODO:.
   // 1) Send data to state.postData
+  const data = (state.postsData = getPostData());
   // 2) POST data to mockAPI
+  await AJAX(`${API_URL}posts`, state.postsData);
   // 3) Render post with user details
 });
+
+// getUserData('email@gmail.com', 123);
+// alert('test');

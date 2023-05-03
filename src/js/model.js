@@ -1,35 +1,16 @@
-import { setImmediate } from 'core-js';
 import { API_URL, ALERT_SEC } from './config';
 import { AJAX, getCurrentUser } from './helpers';
+import signUpView from './views/signUpView';
+import { setImmediate } from 'core-js';
 import { async } from 'regenerator-runtime';
 
-const loginPopup = document.querySelector('.login-wrapper');
-const overlay = document.querySelector('.overlay');
 const signupPage = document.querySelector('.signup-section');
 const app = document.querySelector('.app');
-const message = document.querySelector('.register-message');
-const userExistPopup = document.querySelector('.user--exist_popup');
-const userSuccessPopup = document.querySelector('.user--success_popup');
-
-const toggleLoginPopup = function () {
-  loginPopup.classList.toggle('hidden');
-  overlay.classList.toggle('hidden');
-};
-
-const toggleUserExistPopup = function () {
-  userExistPopup.classList.toggle('hidden');
-  userExistPopup.classList.toggle('show');
-};
-
-const toggleUserSuccessPopup = function () {
-  userSuccessPopup.classList.toggle('hidden');
-  userSuccessPopup.classList.toggle('show');
-};
 
 export const state = {
   user: {},
   loggedUser: {},
-  posts: {},
+  postsData: {},
 };
 
 export const getUser = function (data) {
@@ -42,11 +23,12 @@ export const getUser = function (data) {
   };
 };
 
-// export const getPostData = function (data) {
-//   return {
-
-//   }
-// };
+export const getPostData = function (data) {
+  return {
+    content: data.content,
+    userId: state.loggedUser.userId,
+  };
+};
 
 export const sendUserData = async function (userData) {
   try {
@@ -63,13 +45,11 @@ export const sendUserData = async function (userData) {
       user => user.email === userData.email && user.name === userData.name
     );
 
-    // const message = document.querySelector('.register-message');
-
     if (matchingUser) {
       console.log('User already exist');
       // Popup
-      toggleUserExistPopup();
-      setTimeout(() => toggleUserExistPopup(), ALERT_SEC * 1000);
+      signUpView.toggleUserExistPopup();
+      setTimeout(() => signUpView.toggleUserExistPopup(), ALERT_SEC * 1000);
       return matchingUser;
     }
 
@@ -86,8 +66,8 @@ export const sendUserData = async function (userData) {
     const registerData = await res.json();
     if (registerData) {
       // Popup
-      toggleUserSuccessPopup();
-      setTimeout(() => toggleUserSuccessPopup(), ALERT_SEC * 1000);
+      signUpView.toggleUserSuccessPopup();
+      setTimeout(() => signUpView.toggleUserSuccessPopup(), ALERT_SEC * 1000);
     }
 
     console.log('user details sent:', registerData);
@@ -111,14 +91,14 @@ export const getUserData = async function (email, password) {
     console.log(email, password);
     console.log('Data: ', data);
     console.log('user data: ', typeof user);
-    // TODO: User koji se prijavi ubacuje ID u localeStorage i akd se odjavi mora da izbrise taj ID iz localStorage-a
+    // NOTE: User koji se prijavi ubacuje ID u localeStorage i akd se odjavi mora da izbrise taj ID iz localStorage-a2
     localStorage.setItem('userId', JSON.stringify(user));
     getCurrentUser();
 
     if (user.email === email && user.password === password) {
       console.log('loginnnn');
       // hidde login popup and overlay
-      toggleLoginPopup();
+      signUpView.toggleLoginPopup();
       // hidde signup page
       signupPage.classList.add('hidden');
       // show app
@@ -130,6 +110,6 @@ export const getUserData = async function (email, password) {
 };
 
 export const createPost = async function (data) {
-  const res = await AJAX(`${API_URL}posts`, data);
+  const res = await AJAX(`${API_URL}posts`, state.postsData);
   console.log(data);
 };

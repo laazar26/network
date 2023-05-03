@@ -18,6 +18,14 @@
   @include alert;
   background-color: rgb(254, 226, 226);
   border-left: 4px solid rgb(226, 76, 86);
+
+  .fa-exclamation-circle {
+    font-size: 24px;
+    // position: absolute;
+    // top: 50%;
+    // left: 5%;
+    // transform: translateY(-50%);
+  }
 }
 
 .user--success_popup {
