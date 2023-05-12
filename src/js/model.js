@@ -23,10 +23,10 @@ export const getUser = function (data) {
   };
 };
 
-export const getPostData = function (data) {
+export const getPostData = function (postContent, id) {
   return {
-    content: data.content,
-    userId: state.loggedUser.userId,
+    content: postContent,
+    user_id: id,
   };
 };
 
@@ -109,7 +109,7 @@ export const getUserData = async function (email, password) {
   }
 };
 
-export const createPost = async function (data) {
+export const sendPostData = async function (data) {
   const res = await AJAX(`${API_URL}posts`, state.postsData);
   console.log(data);
 };

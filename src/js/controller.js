@@ -1,10 +1,14 @@
 import { locale } from 'core-js';
 import { async } from 'regenerator-runtime';
 // prettier-ignore
-import { state, getUser, sendUserData, getUserData, createPost } from './model.js';
+import { state, getUser, sendUserData, getUserData, createPost, getPostData } from './model.js';
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
 // import * as model from './model.js';
+import postView from '../js/views/postView.js';
+import View from './views/View.js';
+
+
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -140,14 +144,26 @@ btnLogout.addEventListener('click', function () {
 
 const btnPost = document.querySelector('.btn--post');
 btnPost.addEventListener('click', async function () {
-  console.log(state.loggedUser);
   // TODO:.
-  // 1) Send data to state.postData
-  const data = (state.postsData = getPostData());
-  // 2) POST data to mockAPI
-  await AJAX(`${API_URL}posts`, state.postsData);
-  // 3) Render post with user details
+  // Create POST request and fill table
+  const contentData = document.querySelector('.post-inp').value
+  state.postsData = getPostData(contentData, state.loggedUser.id)
+  const res = await AJAX(`${API_URL}posts`, state.postsData)
+  console.log("🚀 ~ file: controller.js:149 ~ $:", state.postsData)
+  // Render POST on site
+  console.log('Render post in container');
+  // console.log(postView.render());
+  // postView.generateMarkup()
+  postView.render()
+
 });
 
+
+
+const init = function() {
+  localStorage.clear()
+}
+
+init()
 // getUserData('email@gmail.com', 123);
 // alert('test');
