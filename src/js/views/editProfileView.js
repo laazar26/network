@@ -4,11 +4,13 @@ import { state } from '../model.js';
 class EditProfileView extends View {
   _parentEl = document.querySelector('.app');
   _modal = document.querySelector('.edit-profile-window');
+  _btnCloseModal = document.querySelector('.btn--close__modal');
+  _btnParent = document.querySelector('.edit-profile-window');
 
   _generateMarkup() {
-    const html = `
+    return `
     <div class="edit-profile-window">
-        <button class="btn--close-modal">×</button>
+        <button class="btn--close__modal">×</button>
             <div class="text-center mb-5">
                 <span>Account</span>
                 <p>set you account settings down below</p>
@@ -33,11 +35,18 @@ class EditProfileView extends View {
         </div>
     </div>
     `;
-    return html;
+  }
+
+  addHandlerCloseWindow(handler) {
+    this._btnParent.addEventListener('click', function (e) {
+      const clicked = e.target;
+      console.log(clicked);
+      handler();
+    });
   }
 
   _closeModal() {
-    this._modal.classList.toggle('hidden');
+    // this._modal.classList.toggle('hidden');
   }
 }
 

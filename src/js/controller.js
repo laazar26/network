@@ -30,6 +30,7 @@ const popup = document.querySelector('.popup');
 const loginPopup = document.querySelector('.login-wrapper');
 const overlay = document.querySelector('.overlay');
 
+// TODO:
 // samo stavi da mi je email i password uzimaju odmah od ID i ovo mogu da obrisem onda
 let mailField;
 let passField;
@@ -161,10 +162,19 @@ btnPost.addEventListener('click', async function () {
   postView.render();
 });
 
-const init = function () {
-  localStorage.clear();
+const accountSettings = function () {
+  console.log('close modal');
 };
 
+const El = document.querySelector('.edit-profile-window');
+// El.addEventListener('click', function (e) {
+//   console.log(e.target);
+// });
+
+const init = function () {
+  localStorage.clear();
+  // EditProfileView.addHandlerCloseWindow(controlProfile);
+};
 init();
 // getUserData('email@gmail.com', 123);
 // alert('test');
