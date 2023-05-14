@@ -32,7 +32,6 @@ export const getPostData = function (postContent, id) {
 
 export const sendUserData = async function (userData) {
   try {
-    // Check does user exist
     // TODO: NAPRAVITI DA AJAX FUNKCIJA RADI OVDE
     // TODO: Pod znakom pitanja sto AJAX funkcija ne radi, greska je u istoj 90% Ili mozda samo u ovom primeru ence da radi
     // const response = await AJAX(`${API_URL}users`);

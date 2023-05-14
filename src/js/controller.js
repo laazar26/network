@@ -6,8 +6,7 @@ import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
 // import * as model from './model.js';
 import postView from '../js/views/postView.js';
-import View from './views/View.js';
-
+import EditProfileView from '../js/views/editProfileView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -142,28 +141,30 @@ btnLogout.addEventListener('click', function () {
   app.classList.add('hidden');
 });
 
+const btnAccount = document.querySelector('.btn--account');
+btnAccount.addEventListener('click', function () {
+  EditProfileView.render();
+});
+
 const btnPost = document.querySelector('.btn--post');
 btnPost.addEventListener('click', async function () {
   // TODO:.
   // Create POST request and fill table
-  const contentData = document.querySelector('.post-inp').value
-  state.postsData = getPostData(contentData, state.loggedUser.id)
-  const res = await AJAX(`${API_URL}posts`, state.postsData)
-  console.log("🚀 ~ file: controller.js:149 ~ $:", state.postsData)
+  const contentData = document.querySelector('.post-inp').value;
+  state.postsData = getPostData(contentData, state.loggedUser.id);
+  const res = await AJAX(`${API_URL}posts`, state.postsData);
+  console.log('🚀 ~ file: controller.js:149 ~ $:', state.postsData);
   // Render POST on site
   console.log('Render post in container');
   // console.log(postView.render());
   // postView.generateMarkup()
-  postView.render()
-
+  postView.render();
 });
 
+const init = function () {
+  localStorage.clear();
+};
 
-
-const init = function() {
-  localStorage.clear()
-}
-
-init()
+init();
 // getUserData('email@gmail.com', 123);
 // alert('test');
