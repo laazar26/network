@@ -79,6 +79,7 @@ export const sendUserData = async function (userData) {
 
 export const getUserData = async function (email, password) {
   try {
+    if (!email && !password) return;
     const res = await fetch(`${API_URL}users`);
 
     const data = await res.json();

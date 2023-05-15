@@ -63,7 +63,7 @@ btnPopupLogin.forEach(btn => {
       passField = document.querySelector('#password').value;
       console.log(typeof mailField, typeof +passField);
       // Sifra mora da bude string da bi radio login
-      await getUserData(mailField, passField); //FIXME:
+      await getUserData(mailField, passField);
 
       // Clear input fields
       mailField = passField = '';
