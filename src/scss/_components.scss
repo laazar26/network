@@ -239,6 +239,25 @@ ul li:first-child:hover {
         flex-direction: column;
         gap: 15px;
         min-width: 500px;
+
+        .password-container {
+          width: 100%;
+          position: relative;
+
+          span {
+            margin-top: 0;
+            position: absolute;
+            top: 50%;
+            right: 3%;
+            transform: translateY(-50%);
+          }
+
+          .fa {
+            cursor: pointer;
+            color: lightgray;
+            font-size: 20px;
+          }
+        }
       }
 
       .data-column label {
@@ -252,7 +271,7 @@ ul li:first-child:hover {
         background: none;
         border: 2px solid #333;
         border-radius: 0.5rem;
-        padding: 8px 1px;
+        padding: 8px 10px;
         font-size: 18px;
       }
     }

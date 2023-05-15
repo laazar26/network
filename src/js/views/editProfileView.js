@@ -24,7 +24,12 @@ class EditProfileView extends View {
                 <label>Email</label>
                 <input value="${state.loggedUser.email}" type="email" name="email">
                 <label>Password</label>
-                <input value="${state.loggedUser.password}" type="password" name="password">
+                <div class="password-container">
+                  <input class="w-100" id="pass" value="${state.loggedUser.password}" type="password" name="password">
+                  <span class="passwordIcon">
+                    <i class="fa fa-eye eye" aria-hidden="true"></i>
+                  </span>
+                </div>
             </div>
         </form>
         <div class="d-flex justify-content-center">
@@ -52,8 +57,15 @@ class EditProfileView extends View {
     });
   }
 
-  _closeModal() {
-    // this._modal.classList.toggle('hidden');
+  showHidePassword(handler) {
+    // TODO: EVENT DELEGATION OR PROPAGATION
+    this._parentEl.addEventListener('click', function (e) {
+      const clicked = e.target;
+      if (clicked.classList.contains('eye')) {
+        console.log('contain eye:');
+        handler();
+      }
+    });
   }
 }
 

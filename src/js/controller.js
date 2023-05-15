@@ -160,9 +160,21 @@ btnPost.addEventListener('click', async function () {
   PostView.render();
 });
 
+const controlPasswordShowHide = function () {
+  const passwordInput = document.getElementById('pass');
+  const passwordIcon = document.querySelector('.passwordIcon');
+  console.log('handler clicked');
+  const type =
+    passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+
+  passwordInput.setAttribute('type', type);
+  passwordIcon.classList.toggle('active');
+};
+
 const init = function () {
   localStorage.clear();
   EditProfileView.addHandlerCloseWindow();
+  EditProfileView.showHidePassword(controlPasswordShowHide);
 };
 init();
 // getUserData('email@gmail.com', 123);
