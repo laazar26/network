@@ -144,7 +144,7 @@ btnLogout.addEventListener('click', function () {
 
 const btnAccount = document.querySelector('.btn--account');
 btnAccount.addEventListener('click', function () {
-  EditProfileView.render();
+  EditProfileView.generateHtml();
 });
 
 const btnPost = document.querySelector('.btn--post');

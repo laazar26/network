@@ -7,8 +7,7 @@ export default class View {
 
     if (!render) return markup;
 
-    // this._clearInput()
-    this._clear();
+    // this._clear();
     this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 

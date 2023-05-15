@@ -6,9 +6,9 @@ class EditProfileView extends View {
   _btnCloseModal = document.querySelector('.btn--close__modal');
   _modal;
 
-  _generateMarkup() {
-    return `
-    <div id="xxx" class="edit-profile-window">
+  generateHtml() {
+    const html = `
+    <div class="edit-profile-window">
         <button class="btn--close__modal">×</button>
             <div class="text-center mb-5">
                 <span>Account</span>
@@ -34,11 +34,13 @@ class EditProfileView extends View {
         </div>
     </div>
     `;
+
+    this._clear();
+    this._parentEl.insertAdjacentHTML('beforeend', html);
   }
 
   addHandlerCloseWindow(handler) {
     // TODO: Napraviti event delegation za btn element da bih mogao da zatvroim
-    // handler();
     this._parentEl.addEventListener('click', function (e) {
       const clicked = e.target;
 
@@ -46,7 +48,6 @@ class EditProfileView extends View {
         console.log(clicked);
         this._modal = document.querySelector('.edit-profile-window');
         this._modal.classList.add('hidden');
-        // handler();
       }
     });
   }
