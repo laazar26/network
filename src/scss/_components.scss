@@ -191,67 +191,70 @@ ul li:first-child:hover {
   font-size: 20px;
 }
 
-.edit-profile-window {
-  width: 100rem;
-  z-index: 1000;
-  background-color: #2c2c2c;
-  border-radius: 9px;
-  padding: 5rem 6rem;
-  transition: all 0.5s;
+.edit-user-profile {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4rem 6rem #00000040;
 
-  span {
-    display: inline;
-    font-size: 34px;
-    color: #e8e6e3;
-    margin-top: 30px;
-  }
+  .edit-profile-window {
+    width: 100rem;
+    z-index: 1000;
+    background-color: #2c2c2c;
+    border-radius: 9px;
+    padding: 5rem 6rem;
+    transition: all 0.5s;
+    box-shadow: 0 4rem 6rem #00000040;
 
-  p {
-    font-size: 18px;
-    color: #e8e6e3;
-  }
-
-  .btn--close__modal {
-    color: inherit;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: 3.5rem;
-    position: absolute;
-    top: 0.5rem;
-    right: 1.6rem;
-  }
-
-  .edit-profile-form {
-    display: flex;
-    justify-content: center;
-
-    .data-column {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      min-width: 500px;
-    }
-
-    .data-column label {
-      color: #fff;
+    span {
+      display: inline;
       font-size: 20px;
-      font-weight: 600;
+      color: #e8e6e3;
+      margin-top: 30px;
     }
 
-    .data-column input {
-      color: #fff;
-      background: none;
-      border: 2px solid #333;
-      border-radius: 0.5rem;
-      padding: 8px 1px;
+    p {
       font-size: 18px;
+      color: #e8e6e3;
+    }
+
+    .btn--close__modal {
+      color: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 3.5rem;
+      position: absolute;
+      top: 0.5rem;
+      right: 1.6rem;
+    }
+
+    .edit-profile-form {
+      display: flex;
+      justify-content: center;
+
+      .data-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        min-width: 500px;
+      }
+
+      .data-column label {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .data-column input {
+        color: #fff;
+        background: none;
+        border: 2px solid #333;
+        border-radius: 0.5rem;
+        padding: 8px 1px;
+        font-size: 18px;
+      }
     }
   }
 }

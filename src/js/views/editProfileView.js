@@ -2,14 +2,13 @@ import View from './View';
 import { state } from '../model.js';
 
 class EditProfileView extends View {
-  _parentEl = document.querySelector('.app');
-  _modal = document.querySelector('.edit-profile-window');
+  _parentEl = document.querySelector('.edit-user-profile');
   _btnCloseModal = document.querySelector('.btn--close__modal');
-  _btnParent = document.querySelector('.edit-profile-window');
+  _modal;
 
   _generateMarkup() {
     return `
-    <div class="edit-profile-window">
+    <div id="xxx" class="edit-profile-window">
         <button class="btn--close__modal">×</button>
             <div class="text-center mb-5">
                 <span>Account</span>
@@ -38,10 +37,17 @@ class EditProfileView extends View {
   }
 
   addHandlerCloseWindow(handler) {
-    this._btnParent.addEventListener('click', function (e) {
+    // TODO: Napraviti event delegation za btn element da bih mogao da zatvroim
+    // handler();
+    this._parentEl.addEventListener('click', function (e) {
       const clicked = e.target;
-      console.log(clicked);
-      handler();
+
+      if (clicked.classList.contains('btn--close__modal')) {
+        console.log(clicked);
+        this._modal = document.querySelector('.edit-profile-window');
+        this._modal.classList.add('hidden');
+        // handler();
+      }
     });
   }
 

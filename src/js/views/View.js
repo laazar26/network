@@ -1,20 +1,19 @@
-import { mark } from 'regenerator-runtime'
-import icons from '../../img/icons.svg'
+import { mark } from 'regenerator-runtime';
+import icons from '../../img/icons.svg';
 
 export default class View {
-
   render(render = true) {
-    const markup = this._generateMarkup()
-    
-    if(!render) return markup;
-    
+    const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     // this._clearInput()
+    this._clear();
     this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderError(message = this._errorMessage) {
-    const markup = 
-    `
+    const markup = `
     <div class="error">
       <div>
         <svg>
@@ -23,7 +22,10 @@ export default class View {
       </div>
       <p>${message}</p>
     </div>
-    `
-}
+    `;
+  }
 
+  _clear() {
+    this._parentEl.innerHTML = '';
+  }
 }

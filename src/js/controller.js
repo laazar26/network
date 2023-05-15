@@ -5,7 +5,7 @@ import { state, getUser, sendUserData, getUserData, createPost, getPostData } fr
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
 // import * as model from './model.js';
-import postView from '../js/views/postView.js';
+import PostView from '../js/views/postView.js';
 import EditProfileView from '../js/views/editProfileView.js';
 
 import 'core-js/stable';
@@ -157,23 +157,12 @@ btnPost.addEventListener('click', async function () {
   console.log('🚀 ~ file: controller.js:149 ~ $:', state.postsData);
   // Render POST on site
   console.log('Render post in container');
-  // console.log(postView.render());
-  // postView.generateMarkup()
-  postView.render();
+  PostView.render();
 });
-
-const accountSettings = function () {
-  console.log('close modal');
-};
-
-const El = document.querySelector('.edit-profile-window');
-// El.addEventListener('click', function (e) {
-//   console.log(e.target);
-// });
 
 const init = function () {
   localStorage.clear();
-  // EditProfileView.addHandlerCloseWindow(controlProfile);
+  EditProfileView.addHandlerCloseWindow();
 };
 init();
 // getUserData('email@gmail.com', 123);
