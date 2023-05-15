@@ -5,59 +5,32 @@ import { state, getUser, sendUserData, getUserData, createPost, getPostData } fr
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
 // import * as model from './model.js';
+import SignUpView from './views/signUpView.js';
 import PostView from '../js/views/postView.js';
 import EditProfileView from '../js/views/editProfileView.js';
-
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 
 const btnRegister = document.querySelector('.btn--register');
 const btnLogin = document.querySelector('.btn--login');
 const registerForm = document.querySelector('.register-popup');
-// const loginForm
-
-const name = document.querySelector('.name_field').value;
-const surname = document.querySelector('.surname_field').value;
-const email = document.querySelector('.email_field').value;
-const password = document.querySelector('.password_field').value;
 
 const btnPopupLogin = document.querySelectorAll('.btn--popup__login');
 const btnPopupRegister = document.querySelectorAll('.btn--popup__register');
 const btnClosePopup = document.querySelectorAll('.btn--close-modal');
 
 const registerPopup = document.querySelector('.register-wrapper');
-const popup = document.querySelector('.popup');
 const loginPopup = document.querySelector('.login-wrapper');
-const overlay = document.querySelector('.overlay');
 
 // TODO:
 // samo stavi da mi je email i password uzimaju odmah od ID i ovo mogu da obrisem onda
 let mailField;
 let passField;
 
-const toggleRegisterWin = function () {
-  registerPopup.classList.toggle('hidden');
-  overlay.classList.toggle('hidden');
-  // loginPopup.classList.add('hidden');
-};
-
-const toggleLoginWin = function () {
-  loginPopup.classList.toggle('hidden');
-  overlay.classList.toggle('hidden');
-};
-
 btnRegister.addEventListener('click', function () {
-  // registerPopup.classList.remove('hidden');
-  // Blur background
-  // overlay.classList.toggle('hidden');
-  toggleRegisterWin();
+  SignUpView.toggleRegisterWin();
 });
 
 btnLogin.addEventListener('click', function () {
-  // loginPopup.classList.remove('hidden');
-  // // Blur background
-  // overlay.classList.toggle('hidden');
-  toggleLoginWin();
+  SignUpView.toggleLoginPopup();
 });
 
 btnClosePopup.forEach(btn => {
@@ -66,8 +39,8 @@ btnClosePopup.forEach(btn => {
     const clicked = e.target.closest('.popup');
     if (!clicked) return;
 
-    if (clicked.classList.contains('register')) toggleRegisterWin();
-    if (clicked.classList.contains('login')) toggleLoginWin();
+    if (clicked.classList.contains('register')) SignUpView.toggleRegisterWin();
+    if (clicked.classList.contains('login')) SignUpView.toggleLoginPopup();
   });
 });
 
@@ -81,17 +54,16 @@ btnPopupLogin.forEach(btn => {
     if (!clicked) return;
     // console.log(clicked);
 
-    if (clicked.classList.contains('register')) {
-      registerPopup.classList.toggle('hidden');
-      loginPopup.classList.toggle('hidden');
-    }
+    if (clicked.classList.contains('register'))
+      SignUpView.toggleRegisterLoginPopup();
+
     if (clicked.classList.contains('login')) {
       console.log('botton clicked');
       mailField = document.querySelector('#email').value;
       passField = document.querySelector('#password').value;
       console.log(typeof mailField, typeof +passField);
       // Sifra mora da bude string da bi radio login
-      await getUserData(mailField, passField);
+      await getUserData(mailField, passField); //FIXME:
 
       // Clear input fields
       mailField = passField = '';
