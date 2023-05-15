@@ -19,6 +19,7 @@ const btnClosePopup = document.querySelectorAll('.btn--close-modal');
 
 const registerPopup = document.querySelector('.register-wrapper');
 const loginPopup = document.querySelector('.login-wrapper');
+const signupPage = document.querySelector('.signup-section');
 
 // TODO:
 // samo stavi da mi je email i password uzimaju odmah od ID i ovo mogu da obrisem onda
@@ -99,25 +100,15 @@ btnPopupRegister.forEach(btn => {
   });
 });
 
-const btnLogout = document.querySelector('.btn--logout');
-btnLogout.addEventListener('click', function () {
+const controlLogout = function () {
   console.log('click');
-
   localStorage.removeItem('userId');
-
-  const signupPage = document.querySelector('.signup-section');
-  const app = document.querySelector('.app');
-
-  // Show signup page
   signupPage.classList.remove('hidden');
-  // Hide app
-  app.classList.add('hidden');
-});
+};
 
-const btnAccount = document.querySelector('.btn--account');
-btnAccount.addEventListener('click', function () {
+const controlAccount = function () {
   EditProfileView.generateHtml();
-});
+};
 
 const btnPost = document.querySelector('.btn--post');
 btnPost.addEventListener('click', async function () {
@@ -147,6 +138,8 @@ const init = function () {
   localStorage.clear();
   EditProfileView.addHandlerCloseWindow();
   EditProfileView.showHidePassword(controlPasswordShowHide);
+  EditProfileView.addHandlerBtnAccount(controlAccount);
+  SignUpView.addHandlerLogout(controlLogout);
 };
 init();
 // getUserData('email@gmail.com', 123);

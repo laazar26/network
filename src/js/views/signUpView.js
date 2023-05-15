@@ -4,6 +4,21 @@ class SignUpView {
   _userExistPopup = document.querySelector('.user--exist_popup');
   _userSuccessPopup = document.querySelector('.user--success_popup');
   _registerPopup = document.querySelector('.register-wrapper');
+  _btnLogout = document.querySelector('.btn--logout');
+  _body = document.querySelector('body');
+  _app = document.querySelector('.app');
+
+  addHandlerLogout(handler) {
+    this._btnLogout.addEventListener('click', function () {
+      console.log('handler click');
+      handler();
+
+      // // Show signup page
+      // this._signupPage.classList.remove('hidden');
+      // // Hide app
+      this._app.classList.add('hidden');
+    });
+  }
 
   toggleLoginPopup() {
     this._loginPopup.classList.toggle('hidden');

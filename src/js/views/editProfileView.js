@@ -5,6 +5,7 @@ class EditProfileView extends View {
   _parentEl = document.querySelector('.edit-user-profile');
   _btnCloseModal = document.querySelector('.btn--close__modal');
   _modal;
+  _btnAccount = document.querySelector('.btn--account');
 
   generateHtml() {
     const html = `
@@ -62,10 +63,13 @@ class EditProfileView extends View {
     this._parentEl.addEventListener('click', function (e) {
       const clicked = e.target;
       if (clicked.classList.contains('eye')) {
-        console.log('contain eye:');
         handler();
       }
     });
+  }
+
+  addHandlerBtnAccount(handler) {
+    this._btnAccount.addEventListener('click', handler);
   }
 }
 
