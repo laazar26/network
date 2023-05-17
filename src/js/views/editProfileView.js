@@ -51,7 +51,6 @@ class EditProfileView extends View {
       const clicked = e.target;
 
       if (clicked.classList.contains('btn--close__modal')) {
-        console.log(clicked);
         this._modal = document.querySelector('.edit-profile-window');
         this._modal.classList.add('hidden');
       }
@@ -59,7 +58,6 @@ class EditProfileView extends View {
   }
 
   showHidePassword(handler) {
-    // TODO: EVENT DELEGATION OR PROPAGATION
     this._parentEl.addEventListener('click', function (e) {
       const clicked = e.target;
       if (clicked.classList.contains('eye')) {

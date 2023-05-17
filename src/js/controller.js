@@ -8,6 +8,7 @@ import { API_URL } from './config.js';
 import SignUpView from './views/signUpView.js';
 import PostView from '../js/views/postView.js';
 import EditProfileView from '../js/views/editProfileView.js';
+import postView from '../js/views/postView.js';
 
 const btnRegister = document.querySelector('.btn--register');
 const btnLogin = document.querySelector('.btn--login');
@@ -20,6 +21,7 @@ const btnClosePopup = document.querySelectorAll('.btn--close-modal');
 const registerPopup = document.querySelector('.register-wrapper');
 const loginPopup = document.querySelector('.login-wrapper');
 const signupPage = document.querySelector('.signup-section');
+const app = document.querySelector('.app');
 
 // TODO:
 // samo stavi da mi je email i password uzimaju odmah od ID i ovo mogu da obrisem onda
@@ -44,9 +46,6 @@ btnClosePopup.forEach(btn => {
     if (clicked.classList.contains('login')) SignUpView.toggleLoginPopup();
   });
 });
-
-////////////////////////////////////////////////
-////////////////////////////////////////////////
 
 btnPopupLogin.forEach(btn => {
   btn.addEventListener('click', async function (e) {
@@ -101,8 +100,8 @@ btnPopupRegister.forEach(btn => {
 });
 
 const controlLogout = function () {
-  console.log('click');
   localStorage.removeItem('userId');
+  app.classList.add('hidden');
   signupPage.classList.remove('hidden');
 };
 
@@ -110,23 +109,25 @@ const controlAccount = function () {
   EditProfileView.generateHtml();
 };
 
-const btnPost = document.querySelector('.btn--post');
-btnPost.addEventListener('click', async function () {
-  // TODO:.
-  // Create POST request and fill table
+const controlPost = async function () {
   const contentData = document.querySelector('.post-inp').value;
   state.postsData = getPostData(contentData, state.loggedUser.id);
+
   const res = await AJAX(`${API_URL}posts`, state.postsData);
   console.log('🚀 ~ file: controller.js:149 ~ $:', state.postsData);
   // Render POST on site
-  console.log('Render post in container');
   PostView.render();
-});
+};
+
+const controlLike = function () {
+  console.log('like');
+  // TODO:
+};
 
 const controlPasswordShowHide = function () {
   const passwordInput = document.getElementById('pass');
   const passwordIcon = document.querySelector('.passwordIcon');
-  console.log('handler clicked');
+  console.log('eye clicked');
   const type =
     passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
 
@@ -139,6 +140,8 @@ const init = function () {
   EditProfileView.addHandlerCloseWindow();
   EditProfileView.showHidePassword(controlPasswordShowHide);
   EditProfileView.addHandlerBtnAccount(controlAccount);
+  PostView.addHandlerPost(controlPost);
+  postView.addHandlerLike(controlLike);
   SignUpView.addHandlerLogout(controlLogout);
 };
 init();

@@ -1,15 +1,29 @@
-import View from "./View.js"
-import { state } from "../model.js";
+import View from './View.js';
+import { state } from '../model.js';
 
 class PostView extends View {
-    _errorMessage = 'No posts yet'
-    _parentEl = document.querySelector('.main--window__right')
-    // constructor() {
-        //     super()
-        // }
+  _errorMessage = 'No posts yet';
+  _parentEl = document.querySelector('.main--window__right');
+  _btnPost = document.querySelector('.btn--post');
+  _btnLike = document.querySelector('.btn-like');
+  _app = document.querySelector('.app');
 
-    _generateMarkup() {
-        const html =  `
+  addHandlerPost(handler) {
+    this._btnPost.addEventListener('click', function () {
+      handler();
+      console.log('Render post in container');
+    });
+  }
+
+  addHandlerLike(handler) {
+    this._app.addEventListener('click', function (e) {
+      const clicked = e.target;
+      if (clicked.classList.contains('btn-like')) handler();
+    });
+  }
+
+  _generateMarkup() {
+    const html = `
         <div class="win-right mt-3">
                     <ul class="post--ul">
                       <li>
@@ -21,7 +35,7 @@ class PostView extends View {
                         <button class="btn--delete_post btn-danger my-3">Delete</button>
                       </li>
                       <li class="post-item mx-3">
-                        <button class="btn-like">Like</button> 
+                        <button id="buttonLike" class="btn-like">Like</button> 
                             <input placeholder="comment" class="comment-inp" type="text">
                         <button class="btn btn-secondary mx-3">Comment</button>
                       </li>
@@ -31,13 +45,13 @@ class PostView extends View {
         </div>
         `;
 
-        this._clearInput()
-        return html
-      }
+    this._clearInput();
+    return html;
+  }
 
-      _clearInput() {
-        return (this._parentEl.querySelector('.post-inp').value = '');
-      }
+  _clearInput() {
+    return (this._parentEl.querySelector('.post-inp').value = '');
+  }
 }
 
 export default new PostView();

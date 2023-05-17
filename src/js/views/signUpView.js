@@ -12,11 +12,6 @@ class SignUpView {
     this._btnLogout.addEventListener('click', function () {
       console.log('handler click');
       handler();
-
-      // // Show signup page
-      // this._signupPage.classList.remove('hidden');
-      // // Hide app
-      this._app.classList.add('hidden');
     });
   }
 
