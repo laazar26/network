@@ -26,7 +26,7 @@ export const AJAX = async function (url, uploadData = undefined) {
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
 
-    console.log(res);
+    // console.log(res);
     return data;
   } catch (err) {
     // throw err;

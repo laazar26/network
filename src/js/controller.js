@@ -1,7 +1,7 @@
 import { locale } from 'core-js';
 import { async } from 'regenerator-runtime';
 // prettier-ignore
-import { state, getUser, sendUserData, getUserData, createPost, getPostData } from './model.js';
+import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId } from './model.js';
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
 // import * as model from './model.js';
@@ -119,9 +119,10 @@ const controlPost = async function () {
   PostView.render();
 };
 
-const controlLike = function () {
+const controlLike = async function () {
   console.log('like');
   // TODO:
+  await getPostId();
 };
 
 const controlPasswordShowHide = function () {

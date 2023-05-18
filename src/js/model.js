@@ -113,3 +113,13 @@ export const sendPostData = async function (data) {
   const res = await AJAX(`${API_URL}posts`, state.postsData);
   console.log(data);
 };
+
+export const getPostId = async function () {
+  const res = await AJAX(`${API_URL}posts`);
+  // const data = await res.json();
+  const currentPostId = res.length - 1;
+  console.log('🚀 ~ file: model.js:121 ~ getPostId ~ const:', currentPostId);
+  console.log('getPostIdState:', state);
+  // TODO: U STATE UBACI ID KOJI SAM DOBIO OD CURRENTPOSTID I DRUGI PARAMETAR KOJI MI TREBA ZA LIEK API
+  // TODO: Znaci res.length treba da bude ID od posta koji se nov pravi, i iz res-a mogu da uzmem ID od usera
+};
