@@ -1,10 +1,10 @@
 import { locale } from 'core-js';
 import { async } from 'regenerator-runtime';
 // prettier-ignore
-import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId } from './model.js';
+import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId, sendLikeData } from './model.js';
+// import * as model from './model.js';
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
-// import * as model from './model.js';
 import SignUpView from './views/signUpView.js';
 import PostView from '../js/views/postView.js';
 import EditProfileView from '../js/views/editProfileView.js';
@@ -114,6 +114,7 @@ const controlPost = async function () {
   state.postsData = getPostData(contentData, state.loggedUser.id);
 
   const res = await AJAX(`${API_URL}posts`, state.postsData);
+  await getPostId();
   console.log('🚀 ~ file: controller.js:149 ~ $:', state.postsData);
   // Render POST on site
   PostView.render();
@@ -123,6 +124,7 @@ const controlLike = async function () {
   console.log('like');
   // TODO:
   await getPostId();
+  await sendLikeData({ user_id: +state.loggedUser.id, post_id: +state.postId });
 };
 
 const controlPasswordShowHide = function () {

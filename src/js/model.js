@@ -11,6 +11,7 @@ export const state = {
   user: {},
   loggedUser: {},
   postsData: {},
+  postId: {},
 };
 
 export const getUser = function (data) {
@@ -116,10 +117,19 @@ export const sendPostData = async function (data) {
 
 export const getPostId = async function () {
   const res = await AJAX(`${API_URL}posts`);
-  // const data = await res.json();
-  const currentPostId = res.length - 1;
-  console.log('🚀 ~ file: model.js:121 ~ getPostId ~ const:', currentPostId);
-  console.log('getPostIdState:', state);
+  const currentPostId = res.length;
+  state.postId = currentPostId;
+  console.log('getPostIdState:', res.length);
   // TODO: U STATE UBACI ID KOJI SAM DOBIO OD CURRENTPOSTID I DRUGI PARAMETAR KOJI MI TREBA ZA LIEK API
   // TODO: Znaci res.length treba da bude ID od posta koji se nov pravi, i iz res-a mogu da uzmem ID od usera
+};
+
+export const sendLikeData = async function (data) {
+  const res = await AJAX(`${API_URL}likes`, data);
+
+  console.log(res);
+};
+
+export const userAlreadyLiked = async function () {
+  //TODO: AKo je user vec lajkovo onda ne moze oept da lajkuje isti post
 };

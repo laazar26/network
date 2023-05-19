@@ -1,5 +1,6 @@
 import View from './View.js';
 import { state } from '../model.js';
+import { state } from '../model.js';
 
 class PostView extends View {
   _errorMessage = 'No posts yet';
@@ -24,7 +25,7 @@ class PostView extends View {
 
   _generateMarkup() {
     const html = `
-        <div class="win-right mt-3">
+        <div class="win-right mt-3" data-id="${state.postId}">
                     <ul class="post--ul">
                       <li>
                         <div class="border-bottom"></div>
