@@ -1,10 +1,11 @@
 import { locale } from 'core-js';
 import { async } from 'regenerator-runtime';
 // prettier-ignore
-import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId, sendLikeData } from './model.js';
+import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId, sendLikeData, userAlreadyLiked } from './model.js';
 // import * as model from './model.js';
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
+
 import SignUpView from './views/signUpView.js';
 import PostView from '../js/views/postView.js';
 import EditProfileView from '../js/views/editProfileView.js';
@@ -58,7 +59,6 @@ btnPopupLogin.forEach(btn => {
       SignUpView.toggleRegisterLoginPopup();
 
     if (clicked.classList.contains('login')) {
-      console.log('botton clicked');
       mailField = document.querySelector('#email').value;
       passField = document.querySelector('#password').value;
       console.log(typeof mailField, typeof +passField);
@@ -123,14 +123,13 @@ const controlPost = async function () {
 const controlLike = async function () {
   console.log('like');
   // TODO:
-  await getPostId();
-  await sendLikeData({ user_id: +state.loggedUser.id, post_id: +state.postId });
+
+  await userAlreadyLiked();
 };
 
 const controlPasswordShowHide = function () {
   const passwordInput = document.getElementById('pass');
   const passwordIcon = document.querySelector('.passwordIcon');
-  console.log('eye clicked');
   const type =
     passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
 

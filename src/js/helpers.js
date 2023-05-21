@@ -25,13 +25,13 @@ export const AJAX = async function (url, uploadData = undefined) {
     const data = await res.json();
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-
-    // console.log(res);
     return data;
   } catch (err) {
-    // throw err;
+    throw err;
   }
 };
+
+// TODO: napravi funkciju koja ce biti samo za uplodovanje podataka znaci da ima POST method
 
 export const getCurrentUser = function () {
   const userString = localStorage.getItem('userId');

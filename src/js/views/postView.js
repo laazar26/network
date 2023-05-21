@@ -36,7 +36,8 @@ class PostView extends View {
                         <button class="btn--delete_post btn-danger my-3">Delete</button>
                       </li>
                       <li class="post-item mx-3">
-                        <button id="buttonLike" class="btn-like">Like</button> 
+                        <button id="buttonLike" class="btn-like">Like</button>
+                          <span>BROJ LAJKOVA</span> 
                             <input placeholder="comment" class="comment-inp" type="text">
                         <button class="btn btn-secondary mx-3">Comment</button>
                       </li>
