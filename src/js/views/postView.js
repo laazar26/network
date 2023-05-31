@@ -1,10 +1,10 @@
 import View from './View.js';
-import { state } from '../model.js';
-import { state } from '../model.js';
+import { state, checklikes } from '../model.js';
 
 class PostView extends View {
   _errorMessage = 'No posts yet';
-  _parentEl = document.querySelector('.main--window__right');
+  // _parentEl = document.querySelector('.main--window__right');
+  _parentEl = document.querySelector('.posts--container');
   _btnPost = document.querySelector('.btn--post');
   _btnLike = document.querySelector('.btn-like');
   _app = document.querySelector('.app');
@@ -12,32 +12,40 @@ class PostView extends View {
   addHandlerPost(handler) {
     this._btnPost.addEventListener('click', function () {
       handler();
-      console.log('Render post in container');
     });
   }
 
   addHandlerLike(handler) {
-    this._app.addEventListener('click', function (e) {
+    this._parentEl.addEventListener('click', function (e) {
+      // TODO: napravi da uzima attribute za data-value kako bi mogao da znas koji je trenutno post kliknut
       const clicked = e.target;
-      if (clicked.classList.contains('btn-like')) handler();
+      if (clicked.classList.contains('btn-like')) {
+        const parent = clicked.closest('.win-right');
+        const value = parent.dataset.id;
+
+        handler(value);
+        console.log(value);
+      }
+
+      // if (clicked.classList.contains('btn-like')) handler();
     });
   }
 
   _generateMarkup() {
     const html = `
-        <div class="win-right mt-3" data-id="${state.postId}">
+        <div class="win-right mt-3" data-id="${this._data.postId}">
                     <ul class="post--ul">
                       <li>
                         <div class="border-bottom"></div>
                       </li>
                       <li class="mx-3">
-                        <h2 class="pt-1">${state.loggedUser.first_name} posted</h2>
-                        <p>${state.postsData.content}</p>
+                        <h2 class="pt-1">${this._data.loggedUser.first_name} posted</h2>
+                        <p>${this._data.postsData.content}</p>
                         <button class="btn--delete_post btn-danger my-3">Delete</button>
                       </li>
                       <li class="post-item mx-3">
                         <button id="buttonLike" class="btn-like">Like</button>
-                          <span>BROJ LAJKOVA</span> 
+                          <span class="text-white">Likes:${this._data.likeCount}</span> 
                             <input placeholder="comment" class="comment-inp" type="text">
                         <button class="btn btn-secondary mx-3">Comment</button>
                       </li>
@@ -46,8 +54,7 @@ class PostView extends View {
             </div>
         </div>
         `;
-
-    this._clearInput();
+    // this._clearInput();
     return html;
   }
 

@@ -1,7 +1,7 @@
 import { locale } from 'core-js';
 import { async } from 'regenerator-runtime';
 // prettier-ignore
-import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId, sendLikeData, userAlreadyLiked } from './model.js';
+import { state, getUser, sendUserData, getUserData, createPost, getPostData, getPostId, checklikes, userAlreadyLiked } from './model.js';
 // import * as model from './model.js';
 import { AJAX } from './helpers.js';
 import { API_URL } from './config.js';
@@ -53,7 +53,6 @@ btnPopupLogin.forEach(btn => {
     e.preventDefault();
     const clicked = e.target.closest('.popup');
     if (!clicked) return;
-    // console.log(clicked);
 
     if (clicked.classList.contains('register'))
       SignUpView.toggleRegisterLoginPopup();
@@ -79,18 +78,15 @@ btnPopupRegister.forEach(btn => {
     e.preventDefault();
     const clicked = e.target.closest('.popup');
     if (!clicked) return;
-    // console.log(clicked);
 
     if (clicked.classList.contains('register')) {
       const dataArr = [...new FormData(registerForm)];
       const data = Object.fromEntries(dataArr);
 
       state.user = getUser(data);
-      console.log('DEJTA', state.user);
 
       // Promeni funkciju
       await sendUserData(state.user);
-      console.log('send data to database', state.user);
     }
     if (clicked.classList.contains('login')) {
       loginPopup.classList.toggle('hidden');
@@ -110,21 +106,22 @@ const controlAccount = function () {
 };
 
 const controlPost = async function () {
+  await getPostId();
+  await checklikes(state.postId);
+
   const contentData = document.querySelector('.post-inp').value;
   state.postsData = getPostData(contentData, state.loggedUser.id);
 
   const res = await AJAX(`${API_URL}posts`, state.postsData);
-  await getPostId();
-  console.log('🚀 ~ file: controller.js:149 ~ $:', state.postsData);
   // Render POST on site
-  PostView.render();
+  PostView.render(state);
 };
 
-const controlLike = async function () {
-  console.log('like');
-  // TODO:
-
-  await userAlreadyLiked();
+const controlLike = async function (curPostId) {
+  await checklikes(+curPostId);
+  // TODO: napraviti da prvo salje like, ako je vec lajkovano da skloni lajk
+  // 2) i svaki put da l poslao, da l sklonuio lajk mora da prebroji
+  console.log('todo');
 };
 
 const controlPasswordShowHide = function () {

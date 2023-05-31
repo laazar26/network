@@ -1,8 +1,10 @@
 import { API_URL, ALERT_SEC } from './config';
 import { AJAX, getCurrentUser } from './helpers';
 import signUpView from './views/signUpView';
+import PostView from './views/postView';
 import { setImmediate } from 'core-js';
 import { async } from 'regenerator-runtime';
+import postView from './views/postView';
 
 const signupPage = document.querySelector('.signup-section');
 const app = document.querySelector('.app');
@@ -34,12 +36,8 @@ export const getPostData = function (postContent, id) {
 
 export const sendUserData = async function (userData) {
   try {
-    // TODO: NAPRAVITI DA AJAX FUNKCIJA RADI OVDE
-    // TODO: Pod znakom pitanja sto AJAX funkcija ne radi, greska je u istoj 90% Ili mozda samo u ovom primeru ence da radi
-    // const response = await AJAX(`${API_URL}users`);
     const response = await fetch(`${API_URL}users`);
     const data = await response.json();
-    console.log('DEJTA26', data);
 
     // user with the same email or password can not be made again
     const matchingUser = data.find(
@@ -47,14 +45,11 @@ export const sendUserData = async function (userData) {
     );
 
     if (matchingUser) {
-      console.log('User already exist');
       // Popup
       signUpView.toggleUserExistPopup();
       setTimeout(() => signUpView.toggleUserExistPopup(), ALERT_SEC * 1000);
       return matchingUser;
     }
-
-    console.log('userData: ', userData);
 
     const res = await fetch(`${API_URL}users`, {
       method: 'POST',
@@ -70,8 +65,6 @@ export const sendUserData = async function (userData) {
       signUpView.toggleUserSuccessPopup();
       setTimeout(() => signUpView.toggleUserSuccessPopup(), ALERT_SEC * 1000);
     }
-
-    console.log('user details sent:', registerData);
 
     return registerData;
   } catch (err) {
@@ -90,7 +83,6 @@ export const getUserData = async function (email, password) {
     );
 
     // if (!user) throw new Error('User doesnt exist');
-    console.log(email, password);
     // NOTE: User koji se prijavi ubacuje ID u localeStorage i akd se odjavi mora da izbrise taj ID iz localStorage-a2
     localStorage.setItem('userId', JSON.stringify(user));
     getCurrentUser();
@@ -111,9 +103,8 @@ export const getUserData = async function (email, password) {
 export const sendPostData = async function (data) {
   try {
     const res = await AJAX(`${API_URL}posts`, state.postsData);
-    console.log(data);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -122,11 +113,10 @@ export const getPostId = async function () {
     const res = await AJAX(`${API_URL}posts`);
     const currentPostId = res.length;
     state.postId = currentPostId;
-    console.log('getPostIdState:', res.length);
     // TODO: U STATE UBACI ID KOJI SAM DOBIO OD CURRENTPOSTID I DRUGI PARAMETAR KOJI MI TREBA ZA LIEK API
     // TODO: Znaci res.length treba da bude ID od posta koji se nov pravi, i iz res-a mogu da uzmem ID od usera
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -143,7 +133,6 @@ export const sendLikeData = async function (data) {
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
 
     const resData = await res.json();
-    console.log(resData);
   } catch (err) {
     console.error(err);
   }
@@ -160,6 +149,20 @@ const removeLike = async function (id) {
   }
 };
 
+export const checklikes = async function (postId) {
+  const res = await fetch(`${API_URL}likes`);
+  const data = await res.json();
+
+  const counter = data.filter(el => el.post_id === postId);
+  const likeCounter = counter.length;
+
+  console.log('model typeof postidL ', typeof postId);
+  console.log(counter);
+  console.log(likeCounter);
+
+  return (state.likeCount = data.length === 0 ? 0 : likeCounter);
+};
+
 export const userAlreadyLiked = async function () {
   try {
     // TODO: logged user se trazi da li je lajkovo post, ako jeste onda treba na sledi klik like button da mu se povuce lajk, ako nije da mu se doda
@@ -174,7 +177,10 @@ export const userAlreadyLiked = async function () {
         post_id: +state.postId,
       });
 
+      checklikes();
       // TODO: 1) UPDATE UI
+
+      return;
     }
 
     if (matchingLike) {
@@ -183,15 +189,11 @@ export const userAlreadyLiked = async function () {
       console.log('TRUE VALUE', matchingLike.id);
       await removeLike(matchingLike.id);
       // 2) update UI
-      const likeRes = await fetch(`${API_URL}likes`);
-      const likeData = await likeRes.json();
-      const likes = likeData.length;
-      state.likeCount = likes;
+
       console.log(likes);
-      console.log('update UI');
       return;
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
